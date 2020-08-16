@@ -1,10 +1,17 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useMemo } from 'react'
+import { useParams, Redirect } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById';
 
-const HeroScreen = () => {
+const HeroScreen = ({history}) => {
     const { heroId } = useParams()
-    const hero = getHeroById(heroId)
+    const hero = useMemo(() => getHeroById(heroId), [heroId])
+
+    if (!hero) {
+        return <Redirect to='/'/>
+    }
+    const handleReturn = () => {
+        history.goBack()
+    }
     const {
         alter_ego,
         characters,
@@ -17,7 +24,7 @@ const HeroScreen = () => {
             <div className="col-4">
                 <img src={`../assets/heroes/${heroId}.jpg`} className="card-img" alt={superhero}/>
             </div>
-            <div className="col-8">
+            <div className="col-8 animate__animated animate__fadeInLeft">
                 <h3>{superhero}</h3>
                 <ul className="list-goup ">
                     <li className="list-group-item">
@@ -33,6 +40,7 @@ const HeroScreen = () => {
                         <b>characters:</b> {characters}
                     </li>
                 </ul>
+                <button className="btn btn-outline-info" onClick={handleReturn}> Return </button>
             </div>
         </div>
     )

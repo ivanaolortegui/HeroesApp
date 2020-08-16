@@ -5,7 +5,6 @@ import HeroCard from './HeroCard';
 
 const HeroList = ({publisher}) => {
     const heroes = getHeroesByPublisher(publisher)
-    console.log(heroes);
     return (
         <div className="card-column">
             {heroes.map(hero =>( <HeroCard key={hero.id}{...hero}/>))}
