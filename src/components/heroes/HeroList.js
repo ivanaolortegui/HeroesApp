@@ -6,7 +6,7 @@ import HeroCard from './HeroCard';
 const HeroList = ({publisher}) => {
     const heroes = getHeroesByPublisher(publisher)
     return (
-        <div className="card-column">
+        <div className="card-columns">
             {heroes.map(hero =>( <HeroCard key={hero.id}{...hero}/>))}
         </div>
     )

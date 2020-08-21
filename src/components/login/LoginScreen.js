@@ -7,13 +7,15 @@ export const LoginScreen = ({history}) => {
 
     const handleLogin = () =>{
         //history.push('/')
-        history.replace('/')
+        const lastPath = localStorage.getItem('lastPath' || '')
+        console.log(lastPath)
         dispatch({
             type: types.login,
             payload: {
                 name: 'Chiquinquira'
             }
         })
+        history.replace(lastPath)
     }
     return (
         <div className="container mt-5">
